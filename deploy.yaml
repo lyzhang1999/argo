@@ -31,6 +31,7 @@ metadata:
 spec:
   ports:
   - port: 80
+    targetPort: 5000
   selector:
     app: colorapi
   type: LoadBalancer
