@@ -1,11 +1,20 @@
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: colorapi
   labels:
     app: colorapi
 spec:
+  strategy:
+  canary:
+    steps:
+    - setWeight: 20
+    - pause:
+        duration: "60s"
+    - setWeight: 50
+    - pause:
+        duration: "60s"
   replicas: 5
   revisionHistoryLimit: 2
   selector:
